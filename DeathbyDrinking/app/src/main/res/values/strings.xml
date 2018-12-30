@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Death by Drinking</string>
+    <string name="title_activity_setup_game">SetupGameActivity</string>
+    <string name="title_activity_start_game">StartGame</string>
+</resources>
