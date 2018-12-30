@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -35,15 +36,16 @@ public class SetupGameActivity extends AppCompatActivity {
         });
 
         Button joinButton = (Button) findViewById(R.id.JoinGame);
-        createButton.setOnClickListener(new View.OnClickListener(){
+        joinButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                String roomCode = roomCodeTextBox.toString();
-                if (roomCode == "" || roomCode.substring(0,3) == "Room"){
+                String roomCode = roomCodeTextBox.getText().toString();
+                Log.d("LogSetupGameActivity", "roomcode is " + roomCode);
+                if ((roomCode.equals("")) || (roomCode.length() != 4)){
                     gameStartInfoTextBox.setText("Set a Valid 4 Character Room Code");
                     gameStartInfoTextBox.setTextColor(Color.parseColor("red"));
                 }else{
-                    goToStartGame(roomCode.substring(0,3).toLowerCase());
+                    goToStartGame(roomCode.substring(0,4).toLowerCase());
                 }
             }
         });
