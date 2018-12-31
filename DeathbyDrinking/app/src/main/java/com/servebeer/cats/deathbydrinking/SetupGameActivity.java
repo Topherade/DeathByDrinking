@@ -1,18 +1,18 @@
 package com.servebeer.cats.deathbydrinking;
 
 import android.content.Intent;
+
+import org.json.JSONObject;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class SetupGameActivity extends AppCompatActivity {
@@ -22,6 +22,10 @@ public class SetupGameActivity extends AppCompatActivity {
     TextView gameStartInfoTextBox;
     EditText nameTextBox;
     TextView nameInfoTextBox;
+
+    HttpJsonParser jsonParser = new HttpJsonParser();
+    private static final String TAG_SUCCESS = "success";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +84,7 @@ public class SetupGameActivity extends AppCompatActivity {
         ((MyApplication) this.getApplication()).setRoomCode(roomCode);
         ((MyApplication) this.getApplication()).setName(name);
         Intent intent = new Intent(this, StartGame.class);
+        new PostAsync().execute(roomCode, name);
         startActivity(intent);
     }
 
