@@ -20,21 +20,32 @@ public class SetupGameActivity extends AppCompatActivity {
     Button joinButton;
     EditText roomCodeTextBox;
     TextView gameStartInfoTextBox;
+    EditText nameTextBox;
+    TextView nameInfoTextBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_game);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         roomCodeTextBox = (EditText) findViewById(R.id.RoomCode);
         gameStartInfoTextBox = (TextView) findViewById(R.id.GameStartInfo);
+        nameTextBox = (EditText) findViewById(R.id.NameBox);
+        nameInfoTextBox = (TextView) findViewById(R.id.NameInfoBox);
 
         createButton = (Button) findViewById(R.id.CreateGame);
         createButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                goToStartGame("");
+                String name = nameTextBox.getText().toString();
+                Boolean startGame = Boolean.TRUE;
+                if ((name.equals("")) || (name.length() > 20) || name.contains("Name")){
+                    nameInfoTextBox.setText("Set a Valid name less then 20 chars");
+                    nameInfoTextBox.setTextColor(Color.parseColor("red"));
+                    startGame = false;
+                }
+                if (startGame) {
+                    goToStartGame("", name);
+                }
             }
         });
 
@@ -43,21 +54,31 @@ public class SetupGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String roomCode = roomCodeTextBox.getText().toString();
+                String name = nameTextBox.getText().toString();
+                Boolean startGame = Boolean.TRUE;
                 Log.d("LogSetupGameActivity", "roomcode is " + roomCode);
                 if ((roomCode.equals("")) || (roomCode.length() != 4)){
                     gameStartInfoTextBox.setText("Set a Valid 4 Character Room Code");
                     gameStartInfoTextBox.setTextColor(Color.parseColor("red"));
-                }else{
-                    goToStartGame(roomCode.substring(0,4).toLowerCase());
+                    startGame = false;
+                }
+                if ((name.equals("")) || (name.length() > 20) || name.contains("Name")){
+                    nameInfoTextBox.setText("Set a Valid name less then 20 chars");
+                    nameInfoTextBox.setTextColor(Color.parseColor("red"));
+                    startGame = false;
+                }
+                if (startGame){
+                    goToStartGame(roomCode.substring(0,4).toLowerCase(), name);
                 }
             }
         });
     }
-    private void goToStartGame(String roomCode) {
+    private void goToStartGame(String roomCode, String name) {
         if(roomCode == ""){
             roomCode = GeneratingRandomString();
         }
         ((MyApplication) this.getApplication()).setRoomCode(roomCode);
+        ((MyApplication) this.getApplication()).setName(name);
         Intent intent = new Intent(this, StartGame.class);
         startActivity(intent);
     }

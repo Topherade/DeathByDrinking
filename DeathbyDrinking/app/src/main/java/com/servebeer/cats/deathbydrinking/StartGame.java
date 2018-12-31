@@ -9,16 +9,18 @@ import android.view.View;
 import android.widget.TextView;
 
 public class StartGame extends AppCompatActivity {
+    TextView roomCodeTextBox;
+    TextView nameTextBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        TextView roomCodeTextBox = (TextView) findViewById(R.id.roomCodeText);
+        roomCodeTextBox = (TextView) findViewById(R.id.roomCodeText);
         roomCodeTextBox.setText(((MyApplication) this.getApplication()).getRoomCode());
+        nameTextBox = (TextView) findViewById(R.id.nameText);
+        nameTextBox.setText(((MyApplication) this.getApplication()).getName());
     }
 
 }
