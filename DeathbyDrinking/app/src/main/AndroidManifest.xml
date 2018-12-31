@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.servebeer.cats.deathbydrinking">
+    package="com.servebeer.cats.deathbydrinking"
+    android:versionCode="1"
+    android:versionName="1.0">
 
     <application
         android:allowBackup="true"
@@ -10,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:name=".MyApplication">
+        <!-- Main Screen -->
         <activity
             android:name=".SetupGameActivity"
             android:label="@string/title_activity_setup_game"
@@ -19,12 +22,33 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- waiting room -->
         <activity
             android:name=".StartGame"
             android:label="@string/title_activity_start_game"
             android:parentActivityName=".SetupGameActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <!-- All Product Activity -->
+        <activity
+            android:name=".AllProductsActivity"
+            android:label="All Products" >
+        </activity>
+
+        <!-- Add Product Activity -->
+        <activity
+            android:name=".NewProductActivity"
+            android:label="Add New Product" >
+        </activity>
+
+        <!-- Edit Product Activity -->
+        <activity
+            android:name=".EditProductActivity"
+            android:label="Edit Product" >
+        </activity>
     </application>
+
+    <!--  Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

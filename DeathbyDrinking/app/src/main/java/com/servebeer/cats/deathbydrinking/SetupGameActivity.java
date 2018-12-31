@@ -16,7 +16,10 @@ import android.widget.TextView;
 import java.util.Random;
 
 public class SetupGameActivity extends AppCompatActivity {
-
+    Button createButton;
+    Button joinButton;
+    EditText roomCodeTextBox;
+    TextView gameStartInfoTextBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,10 +27,10 @@ public class SetupGameActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final EditText roomCodeTextBox = (EditText) findViewById(R.id.RoomCode);
-        final TextView gameStartInfoTextBox = (TextView) findViewById(R.id.GameStartInfo);
+        roomCodeTextBox = (EditText) findViewById(R.id.RoomCode);
+        gameStartInfoTextBox = (TextView) findViewById(R.id.GameStartInfo);
 
-        Button createButton = (Button) findViewById(R.id.CreateGame);
+        createButton = (Button) findViewById(R.id.CreateGame);
         createButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
@@ -35,7 +38,7 @@ public class SetupGameActivity extends AppCompatActivity {
             }
         });
 
-        Button joinButton = (Button) findViewById(R.id.JoinGame);
+        joinButton = (Button) findViewById(R.id.JoinGame);
         joinButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
